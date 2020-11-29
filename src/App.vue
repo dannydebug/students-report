@@ -16,14 +16,12 @@ export default defineComponent({
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  @apply text-copy;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 body {
-  background-color: #4c55a5;
+  @apply bg-brand;
 }
 </style>
