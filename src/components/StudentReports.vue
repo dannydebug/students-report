@@ -3,7 +3,7 @@
     <form
       v-if="schools !== null"
       class="flex flex-col justify-center items-center rounded border p-10"
-      @submit.prevent="download"
+      @submit="download"
     >
       <label for="school-select">Select a school to download the report:</label>
       <select
@@ -12,7 +12,7 @@
         v-model="selectedSchoolId"
         class="mt-2 px-2 py-1 border-2 border-gray-400 rounded"
       >
-        <option value="null" disabled>
+        <option :value="null" disabled>
           -- Select a school --
         </option>
         <option v-for="school in schools" :key="school._id" :value="school._id">
@@ -37,15 +37,17 @@ export default defineComponent({
   name: "StudentReports",
   setup() {
     const schools = ref<School[]>([]);
-
     const selectedSchoolId = ref<string | null>(null);
 
     onMounted(async () => {
       schools.value = await client.getSchools();
     });
-    async function download() {
+
+    function download(e: Event) {
+      e.preventDefault();
+      console.log(e);
       if (selectedSchoolId.value !== null) {
-        await client.downloadStudentsCsvReport(selectedSchoolId.value);
+        client.downloadStudentsCsvReport(selectedSchoolId.value);
       }
     }
 

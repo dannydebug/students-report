@@ -15,7 +15,7 @@ export class Client {
   baseUrl = process.env.VUE_APP_BACKEND_URL;
 
   async getSchools() {
-    const res = await fetch(this.baseUrl + "/schools", { method: "GET" });
+    const res = await fetch(this.baseUrl + "/schools");
     if (!res.ok) {
       return alert("Unable to fetch schools");
     }
@@ -23,13 +23,7 @@ export class Client {
     return data;
   }
 
-  async downloadStudentsCsvReport(id: string) {
-    const res = await fetch(this.baseUrl + `/schools/${id}/students.csv`, {
-      method: "GET"
-    });
-    if (!res.ok) {
-      return alert("Unable to fetch students report");
-    }
+  downloadStudentsCsvReport(id: string) {
     window.location.assign(this.baseUrl + `/schools/${id}/students.csv`);
   }
 }
