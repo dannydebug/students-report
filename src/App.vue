@@ -1,5 +1,7 @@
 <template>
-  <StudentReports />
+  <div>
+    <StudentReports />
+  </div>
 </template>
 
 <script lang="ts">
@@ -19,5 +21,9 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+body {
+  background-color: rgba(110, 231, 183, 1);
 }
 </style>
