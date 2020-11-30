@@ -27,5 +27,3 @@ export class Client {
     window.location.assign(this.baseUrl + `/schools/${id}/students.csv`);
   }
 }
-
-export default new Client();

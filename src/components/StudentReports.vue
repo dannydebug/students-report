@@ -1,8 +1,8 @@
 <template>
   <div class="w-1/2 mx-auto mt-10 bg-white rounded shadow-md">
     <form
-      v-if="schools !== null"
-      class="flex flex-col justify-center items-center rounded border p-10"
+      v-if="!loading"
+      class="py-10 flex flex-col justify-center items-center border rounded"
       @submit="download"
     >
       <label for="school-select">Select a school to download the report:</label>
@@ -10,7 +10,7 @@
         id="school-select"
         required
         v-model="selectedSchoolId"
-        class="mt-2 px-2 py-1 border-2 border-gray-400 rounded"
+        class="w-3/5 mt-2 px-2 py-1 border-2 border-gray-400 rounded"
       >
         <option :value="null" disabled>
           -- Select a school --
@@ -21,7 +21,8 @@
       </select>
       <button
         type="submit"
-        class="mt-6 px-3 py-1 border-2 rounded purple-border btn font-bold"
+        class="mt-8 px-3 py-1 btn"
+        :disabled="selectedSchoolId === null"
       >
         Download Report
       </button>
@@ -31,16 +32,20 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import client, { School } from "../services/client";
+import { Client, School } from "../services/client";
 
 export default defineComponent({
   name: "StudentReports",
   setup() {
     const schools = ref<School[]>([]);
     const selectedSchoolId = ref<string | null>(null);
+    const loading = ref(false);
+    const client = new Client();
 
     onMounted(async () => {
+      loading.value = true;
       schools.value = await client.getSchools();
+      loading.value = false;
     });
 
     function download(e: Event) {
@@ -54,35 +59,40 @@ export default defineComponent({
     return {
       schools,
       download,
-      selectedSchoolId
+      selectedSchoolId,
+      loading
     };
   }
 });
 </script>
 
 <style lang="scss" scoped>
-$base-color: #4c55a5;
-
-.purple-background {
-  background-color: $base-color;
-}
-
 .purple-border {
-  border-color: $base-color;
+  @apply border-brand;
 }
 
 select:focus {
-  border-color: $base-color;
+  @apply border-brand;
   @apply outline-none;
 }
 
 .btn {
-  border-color: $base-color;
-  color: $base-color;
+  @apply border-brand;
+  @apply text-brand;
+  @apply border-2;
+  @apply font-bold;
+  @apply rounded;
 
   &:hover {
-    background-color: $base-color;
-    color: white;
+    @apply bg-brand;
+    @apply text-white;
+  }
+
+  &:disabled {
+    @apply cursor-not-allowed;
+    @apply bg-gray-400;
+    @apply border-gray-400;
+    @apply text-white;
   }
 }
 </style>
