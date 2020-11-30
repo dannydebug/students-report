@@ -12,7 +12,7 @@
         v-model="selectedSchoolId"
         class="w-3/5 mt-2 px-2 py-1 border-2 border-gray-400 rounded"
       >
-        <option :value="null" disabled>
+        <option value="null" disabled>
           -- Select a school --
         </option>
         <option v-for="school in schools" :key="school._id" :value="school._id">
