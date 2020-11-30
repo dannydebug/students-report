@@ -35,7 +35,7 @@ import { defineComponent, ref, onMounted } from "vue";
 import { Client, School } from "../services/client";
 
 export default defineComponent({
-  name: "StudentReports",
+  name: "StudentsReport",
   setup() {
     const schools = ref<School[]>([]);
     const selectedSchoolId = ref<string | null>(null);

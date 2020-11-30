@@ -1,16 +1,16 @@
 <template>
   <div>
-    <StudentReports />
+    <StudentsReport />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import StudentReports from "./components/StudentReports.vue";
+import StudentsReport from "./components/StudentsReport.vue";
 
 export default defineComponent({
   name: "App",
-  components: { StudentReports }
+  components: { StudentsReport }
 });
 </script>
 
