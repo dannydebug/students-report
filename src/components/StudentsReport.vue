@@ -50,7 +50,6 @@ export default defineComponent({
 
     function download(e: Event) {
       e.preventDefault();
-      console.log(e);
       if (selectedSchoolId.value !== null) {
         client.downloadStudentsCsvReport(selectedSchoolId.value);
       }
